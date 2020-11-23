@@ -4,6 +4,8 @@
 #include <limits.h>
 #include <stdlib.h>
 #include<math.h>
+#include<time.h>
+
 #define int long long int
 
 
@@ -310,7 +312,9 @@ main()
     for(int i=1;i<=nodes;i++){previous[i]=-1;dist[i]=LLONG_MAX; visit[i]=0;}
     visit[source]=1;
     dist[source]=0;
-
+    
+    time_t start,end;
+    start=clock();
     //Building Minimum Heap
     for(int i=1;i<=nodes;i++)
     {
@@ -318,9 +322,14 @@ main()
        build_fibonacciheap(i,dist[i]);
     }
     //dijkstra
-    dijkstra_fibonacciheap();
+     dijkstra_fibonacciheap();
+     end=clock();
     //printing path from source to node to destination node 'n'
-    print_path();
+    //print_path();
+    double num=end-start;
+    double den=CLOCKS_PER_SEC;
+    double time=num/den;
+    printf("\nTime=%f",time);
 
     free(graph);
     free(traverse);
