@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include<time.h>
+
 #define int long long int
 
 int nodes,edges,distance,a,b,path_cost;
@@ -85,8 +87,15 @@ int main()
     for(int i=2;i<=nodes;i++)shortest[i-1]=i;
     path_cost=1e18;
     int final_path[nodes+2];
+    time_t start,end;
+    start=clock();
     TSP_Backtracking(&shortest,1,nodes-1,&adjac,&final_path);
-    print_path(&final_path);
+    //print_path(&final_path);
+    end=clock();
+    double num=end-start;
+    double den=CLOCKS_PER_SEC;
+    double time=num/den;
+    printf("\nTime=%f",time);
 
     return 0;
 }
