@@ -2,6 +2,7 @@
 #include <string.h>
 #include <limits.h>
 #include <stdlib.h>
+##include<time.h>
 #define int long long int
 
 struct adjacencylist
@@ -109,8 +110,15 @@ int main()
     dist[source]=0;
 
     //dijkstra
+    time_t start,end;
+    start=clock();
     dijkstra_minheap(&adjac,&dist,&previous,&visit);
+    end=clock();
     //printing path from source to node to destination node 'n'
-    print_path(&previous);
+    //print_path(&previous);
+    double num=end-start;
+    double den=CLOCKS_PER_SEC;
+    double time=num/den;
+    printf("\nTime=%f",time);
     return 0;
 }
