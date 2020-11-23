@@ -1,4 +1,6 @@
 #include<stdio.h>
+#include<time.h>
+
 int mat[10][10];
 int TSP_DP(int bitmask,int prevnode,int check,int nodes,int cost,int finalcost) //generating 2^n subsets
 {
@@ -34,6 +36,14 @@ int main()
        mat[b][a]=distance;
       }
   }
+  time_t start,end;
+  start=clock();
   int answer=TSP_DP(bitmask,prevnode,check,nodes,cost,finalcost);
   printf("Answer=%d\n",answer);
+  end=clock();
+    
+  double num=end-start;
+  double den=CLOCKS_PER_SEC;
+  double time=num/den;
+  printf("\nTime=%f",time);
 }
