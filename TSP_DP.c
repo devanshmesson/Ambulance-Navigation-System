@@ -29,7 +29,7 @@ int main()
   scanf("%lld%lld",&nodes,&edges);
   check=(1<<nodes)-1;
 
-  for(int i=0;i<=59;i++)for(int j=0;j<=59;j++)mat[i][j]=0;
+  for(int i=0;i<=59;i++)for(int j=0;j<=59;j++)mat[i][j]=1e18;
 
 
   for(int i=0;i<edges;i++)
