@@ -4,7 +4,7 @@
 #define int long long int
 
 int nodes,edges,distance,a,b,path_cost;
-int graph[10][10];
+int graph[100][100];
 int swap(int *a,int *b){ int temp=*a; *a=*b; *b=temp;}
 
 
