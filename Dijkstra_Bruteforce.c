@@ -91,7 +91,7 @@ int print_path(int *previous)
 int main()
 {
     scanf("%lld%lld",&nodes,&edges); //nodes and edges
-    int adjac[nodes+1],previous[nodes+1],map[nodes+1];;
+    int adjac[nodes+1],previous[nodes+1],map[nodes+1];
     memset(adjac,0,sizeof(adjac));
 
     //graph input in linked list begins
