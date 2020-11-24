@@ -1,7 +1,14 @@
 #include<stdio.h>
 #include<time.h>
 
-int mat[10][10];
+#ifndef ONLINE_JUDGE
+#define freopen freopen("input.txt","r",stdin);freopen("output.txt","w",stdout);
+#else
+#define freopen //comment
+#endif
+
+#define int long long int
+int mat[60][60];
 int TSP_DP(int bitmask,int prevnode,int check,int nodes,int cost,int finalcost) //generating 2^n subsets
 {
   if(bitmask==check){return mat[prevnode][0];}
@@ -17,13 +24,17 @@ int TSP_DP(int bitmask,int prevnode,int check,int nodes,int cost,int finalcost) 
 }
 int main()
 {
+  //freopen
   int nodes,edges,bitmask=1,prevnode=0,check,cost,finalcost=1e18,distance,a,b;
-  scanf("%d%d",&nodes,&edges);
+  scanf("%lld%lld",&nodes,&edges);
   check=(1<<nodes)-1;
+
+  for(int i=0;i<=59;i++)for(int j=0;j<=59;j++)mat[i][j]=0;
+
 
   for(int i=0;i<edges;i++)
   {
-      scanf("%d%d%d",&a,&b,&distance);
+      scanf("%lld%lld%lld",&a,&b,&distance);
       a--;b--;
       if(mat[a][b]>distance) //For Multiple edges
       {
@@ -39,9 +50,9 @@ int main()
   time_t start,end;
   start=clock();
   int answer=TSP_DP(bitmask,prevnode,check,nodes,cost,finalcost);
-  printf("Answer=%d\n",answer);
+  printf("Answer=%lld\n",answer);
   end=clock();
-    
+
   double num=end-start;
   double den=CLOCKS_PER_SEC;
   double time=num/den;
