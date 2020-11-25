@@ -50,7 +50,7 @@ int main()
   time_t start,end;
   start=clock();
   int answer=TSP_DP(bitmask,prevnode,check,nodes,cost,finalcost);
-  printf("Answer=%lld\n",answer);
+  printf("Cost of shortest path=%lld\n",answer);
   end=clock();
 
   double num=end-start;
