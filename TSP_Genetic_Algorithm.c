@@ -1,16 +1,3 @@
-/*
-1 2 6
-1 3 9
-1 4 8
-1 5 5
-2 3 9
-2 4 2
-2 5 4
-3 4 1
-3 5 8
-4 5 3
-*/
-
 #include <stdio.h>
 #include <limits.h>
 #include<stdbool.h>
@@ -18,27 +5,34 @@
 #include <stdlib.h>
 #include<time.h>
 
-#define int long long int
-int population_size = 10,ver,nodes,graph[50][50],count=1,map[100],chromo[50];
+int population_size,ver,nodes,graph[50][50],count=1,map[100],chromo[50],edges,nodes,generations;
+
 
 struct CHROMOSOME
 {
-    char gnome[50];
+    int gnome[50];
     int fitness;
 };
 
-int optimal_answer=1e18;
-char optimal_path[50];
-char chromosome[50];
+int optimal_answer=1e9;
+int optimal_path[50];
+int chromosome[50];
 
-void swap(char*a,char*b){char sw=*a;*a=*b;*b=sw;}
+#ifndef ONLINE_JUDGE
+#define freopen freopen("in.txt","r",stdin);freopen("outt.txt","w",stdout);
+#else
+#define freopen //comment
+#endif
+
+
+void swap(int*a,int*b){int sw=*a;*a=*b;*b=sw;}
 
 int Generate_Random_Number(int start,int end)
 {
     return start + (rand() % (end - start));
 }
 
-void update_optimal_answer(int update,char ch[])
+void update_optimal_answer(int update,int ch[])
 {
     if(update<optimal_answer)
     {
@@ -49,7 +43,7 @@ void update_optimal_answer(int update,char ch[])
 
 void generate_chromosome()
 {
-    chromosome[0]='1';
+    chromosome[0]=1;
     for(int i = 0; i<=nodes; i++)map[i]=0;
     count = 1;
     while(count!=nodes)
@@ -58,7 +52,7 @@ void generate_chromosome()
         if(map[temp]==0)
         {
             map[temp]++;
-            chromosome[count]=(char)(temp+48);
+            chromosome[count]=temp;
             count++;
         }
     }
@@ -67,8 +61,7 @@ void generate_chromosome()
 }
 
 
-
-int Chromosome_Fitness(char chromosome_array[])
+int Chromosome_Fitness(int chromosome_array[])
 {
     int chromo_fitness = 0,i=0,index1,index2;
     int stop=nodes-1;
@@ -76,7 +69,6 @@ int Chromosome_Fitness(char chromosome_array[])
     {
         index1=chromosome_array[i];
         index2=chromosome_array[i+1];
-        index1-=48;index2-=48;
         chromo_fitness+=graph[index1][index2];
         stop--;
         i++;
@@ -84,13 +76,13 @@ int Chromosome_Fitness(char chromosome_array[])
     return chromo_fitness;
 }
 
-void mutate_chromosome(char gnome[])
+void mutate_chromosome(int gnome[])
 {
     while(1)
     {
         int r = Generate_Random_Number(1,nodes);
         int r1 = Generate_Random_Number(1,nodes);
-        if(r1 !=r) {swap(&gnome[r],&gnome[r1]);break;}
+        if(r!=r1 ) {swap(&gnome[r],&gnome[r1]);break;}
     }
     for(int i=0;i<=nodes;i++)chromo[i]=gnome[i];
 }
@@ -98,7 +90,7 @@ void mutate_chromosome(char gnome[])
 
 void Find_Shortest_Route()
 {
-
+    int fl=0;
     struct CHROMOSOME population[population_size+1];
     struct CHROMOSOME temp;
 
@@ -113,26 +105,23 @@ void Find_Shortest_Route()
     }
 
 
-    printf("Initial \tChromosome\nPopulation   FITNESS VALUE\n");
-   // printf("Chromosome\nFITNESS VALUE \n");
+    /*printf("Initial \tChromosome\nPopulation   FITNESS VALUE\n");
 
     for(int i = 0; i<population_size; i++)
     {
         for(int j=0;j<nodes;j++)
         {
-         printf("%c",population[i].gnome[j]);
+         printf("%d ",population[i].gnome[j]);
         }
         printf(" ->         %d\n",population[i].fitness);
 
-    }
+    }*/
 
-    int generations=20,initial_generation=generations+1;
+    int initial_generation=generations+1;
 
     while (generations>0)
         {
-
         struct CHROMOSOME new_population[population_size+1];
-
         int index=0;
         for (int i = 0; i < population_size; i++)
             {
@@ -168,7 +157,6 @@ void Find_Shortest_Route()
                 }
             }
         }
-
         for(int s=0;s<population_size;s++)
         {
             population[s].fitness=new_population[s].fitness;
@@ -178,7 +166,7 @@ void Find_Shortest_Route()
             }
         }
 
-        printf("AFTER MUTATION\n");
+        /*printf("AFTER MUTATION\n");
         printf("generation %d\n",initial_generation-generations);
         printf("GNOME     FITNESS VALUE \n");
 
@@ -186,11 +174,11 @@ void Find_Shortest_Route()
         {
             for(int j=0;j<=nodes;j++)
             {
-                printf("%c",population[i].gnome[j]);
+                printf("%d ",population[i].gnome[j]);
             }
             printf("\t\t");
             printf("%d\n",population[i].fitness);
-        }
+        }*/
         generations--;
     }
 }
@@ -198,20 +186,28 @@ void Find_Shortest_Route()
 
 int main()
 {
-    scanf("%lld",&nodes);
-    for(int x=1; x<=nodes; x++)
+    scanf("%d%d",&nodes,&edges);
+    int a,b,d;
+    for(int x=1; x<=edges; x++)
     {
-        for(int y=x+1; y<=nodes; y++)
-        {
-            int g=Generate_Random_Number(1,10);
-            printf("%lld %lld %lld\n",x,y,g);
-            graph[x][y]=g;
-            graph[y][x]=g;
-        }
+      scanf("%d%d%d",&a,&b,&d);
+      graph[a][b]=d;
+      graph[b][a]=d;
     }
+    printf("Population size:");
+    scanf("%d",&population_size);
+    printf("Number of Generations:");
+    scanf("%d",&generations);
+    time_t start,end;
+    start=clock();
     Find_Shortest_Route();
-    printf("Minimized cost=%lld\n",optimal_answer);
+    end=clock();
+    double num=end-start;
+    double den=CLOCKS_PER_SEC;
+    double time=num/den;
+    printf("Minimized cost of the path=%d units\n",optimal_answer);
     printf("Shortest Route : ");
-    for(int i=0;i<=nodes;i++)printf("%c",optimal_path[i]);
+    for(int i=0;i<=nodes;i++)printf("%d ",optimal_path[i]);
+    printf("\nTime=%f",time);
     return 0;
 }
