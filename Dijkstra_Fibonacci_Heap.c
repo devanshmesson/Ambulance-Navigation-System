@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <string.h>
 #include <limits.h>
@@ -7,6 +6,12 @@
 #include<time.h>
 
 #define int long long int
+
+#ifndef ONLINE_JUDGE
+#define freopen freopen("input.txt","r",stdin);freopen("Output.txt","w",stdout);
+#else
+#define freopen //comment
+#endif
 
 
 struct adjacencylist
@@ -35,6 +40,7 @@ int n,maxrank;
 int initialnodes;
 
 int adjac[100005],previous[100005],dist[100005];
+int visit[100005];
 
 
 struct adjacencylist *graph[100002],*iterate;
@@ -293,6 +299,7 @@ int print_path()
 
 main()
 {
+    freopen
     scanf("%lld%lld",&nodes,&edges); //nodes and edges
     initialnodes=nodes;
     memset(adjac,0,sizeof(adjac));
@@ -308,7 +315,7 @@ main()
     }
     //Djkstra algorithm
     source=1;
-    int visit[nodes+1];
+    
     for(int i=1;i<=nodes;i++){previous[i]=-1;dist[i]=LLONG_MAX; visit[i]=0;}
     visit[source]=1;
     dist[source]=0;
@@ -318,21 +325,20 @@ main()
     //Building Minimum Heap
     for(int i=1;i<=nodes;i++)
     {
-
        build_fibonacciheap(i,dist[i]);
     }
     //dijkstra
      dijkstra_fibonacciheap();
      end=clock();
     //printing path from source to node to destination node 'n'
-    //print_path();
+     printf("Shortest path from node 1 to node 100000:\n");
+    print_path();
+    printf("Shortest distance from node 1 to node 100000:%lld units\n",dist[nodes]);
     double num=end-start;
     double den=CLOCKS_PER_SEC;
     double time=num/den;
-    printf("\nTime=%f",time);
+    printf("Time=%f milliseconds",time*1000);
 
-    free(graph);
-    free(traverse);
-    free(ptr);
+    
     return 0;
 }
