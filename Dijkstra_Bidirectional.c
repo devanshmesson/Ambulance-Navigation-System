@@ -6,6 +6,12 @@
 
 #define int long long int
 
+#ifndef ONLINE_JUDGE
+#define freopen freopen("input.txt","r",stdin);freopen("Output.txt","w",stdout);
+#else
+#define freopen //comment
+#endif
+
 struct adjacencylist
 {
    int nodeindex;
@@ -165,7 +171,7 @@ int decrease_key_F()
       parent=update/2;
     }
 }
-int dijkstra_minheap_f()
+int bidirectional_dijkstra_minheap()
 {
      forwardist[1]=0;
      backwardist[nodes]=0;
@@ -317,11 +323,12 @@ int path()
 }
 int main()
 {
+    freopen
     scanf("%lld%lld",&nodes,&edges); //nodes and edges
     memset(adjac,0,sizeof(adjac));
     dist=3e18;
-    heap1=(struct minheap_f*)malloc((nodes+1)*sizeof(struct minheap_f));
-    heap2=(struct minheap_b*)malloc((nodes+1)*sizeof(struct minheap_b));
+    heap1=(struct minheap_f*)malloc((100001)*sizeof(struct minheap_f));
+    heap2=(struct minheap_b*)malloc((100001)*sizeof(struct minheap_b));
 
     //graph input in linked list begins
     for(int i=0;i<edges;i++)
@@ -349,19 +356,19 @@ int main()
     build_minheap_b();
 
     //dijkstra
-    dijkstra_minheap_f();
+    bidirectional_dijkstra_minheap();
     end=clock();
     //printf("dist=%d\n",dist);
     //printing path from source to node to destination node 'n'
-    //path();
+    printf("Shortest path from node 1 to node 100000:\n");
+    path();
+    printf("\nCost of the shortest path:%lld units",dist);
+
     double num=end-start;
     double den=CLOCKS_PER_SEC;
     double time=num/den;
-    printf("\nTime=%f",time);
+    printf("\nTime=%f milliseconds",time*1000);
 
-    free(graph);
-    free(heap1);
-    free(traverse);
-    free(ptr);
+    
     return 0;
 }
