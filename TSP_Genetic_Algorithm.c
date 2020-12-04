@@ -19,7 +19,7 @@ int optimal_path[50];
 int chromosome[50];
 
 #ifndef ONLINE_JUDGE
-#define freopen freopen("in.txt","r",stdin);freopen("outt.txt","w",stdout);
+#define freopen freopen("Input2.txt","r",stdin);freopen("Output.txt","w",stdout);
 #else
 #define freopen //comment
 #endif
@@ -106,7 +106,6 @@ void Find_Shortest_Route()
 
 
     /*printf("Initial \tChromosome\nPopulation   FITNESS VALUE\n");
-
     for(int i = 0; i<population_size; i++)
     {
         for(int j=0;j<nodes;j++)
@@ -114,7 +113,6 @@ void Find_Shortest_Route()
          printf("%d ",population[i].gnome[j]);
         }
         printf(" ->         %d\n",population[i].fitness);
-
     }*/
 
     int initial_generation=generations+1;
@@ -169,7 +167,6 @@ void Find_Shortest_Route()
         /*printf("AFTER MUTATION\n");
         printf("generation %d\n",initial_generation-generations);
         printf("GNOME     FITNESS VALUE \n");
-
         for(int i=0;i<population_size;i++)
         {
             for(int j=0;j<=nodes;j++)
@@ -186,6 +183,7 @@ void Find_Shortest_Route()
 
 int main()
 {
+    freopen
     scanf("%d%d",&nodes,&edges);
     int a,b,d;
     for(int x=1; x<=edges; x++)
@@ -194,9 +192,7 @@ int main()
       graph[a][b]=d;
       graph[b][a]=d;
     }
-    printf("Population size:");
     scanf("%d",&population_size);
-    printf("Number of Generations:");
     scanf("%d",&generations);
     time_t start,end;
     start=clock();
@@ -206,8 +202,8 @@ int main()
     double den=CLOCKS_PER_SEC;
     double time=num/den;
     printf("Minimized cost of the path=%d units\n",optimal_answer);
-    printf("Shortest Route : ");
+    printf("\nShortest Route : ");
     for(int i=0;i<=nodes;i++)printf("%d ",optimal_path[i]);
-    printf("\nTime=%f",time);
+    printf("\nTime=%f Milliseconds",time);
     return 0;
 }
