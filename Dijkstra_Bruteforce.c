@@ -12,6 +12,14 @@ struct adjacencylist
   struct adjacencylist* adj;
 };
 
+#ifndef ONLINE_JUDGE
+#define freopen freopen("Input2.txt","r",stdin);freopen("Output.txt","w",stdout);
+#else
+#define freopen //comment
+#endif
+
+int adjac[100002],previous[100002],map[100002];
+int visit[100002],dist[100002];
 struct adjacencylist *graph[100002],*traverse;
 int nodes,edges,distance,a,b,update,parent,pick,cur,ok=0,adjacent,edge,c1,c2,small,stop,source,heapsize;
 int index,answer_exist,prev,cnt;
@@ -90,8 +98,8 @@ int print_path(int *previous)
 
 int main()
 {
+    freopen
     scanf("%lld%lld",&nodes,&edges); //nodes and edges
-    int adjac[nodes+1],previous[nodes+1],map[nodes+1];
     memset(adjac,0,sizeof(adjac));
 
     //graph input in linked list begins
@@ -105,7 +113,6 @@ int main()
     }
     //Djkstra algorithm
     source=1;
-    int visit[nodes+1],dist[nodes+1];
     for(int i=1;i<=nodes;i++){dist[i]=LLONG_MAX; visit[i]=0;previous[i]=-1;}
     dist[source]=0;
 
@@ -115,10 +122,12 @@ int main()
     dijkstra_minheap(&adjac,&dist,&previous,&visit);
     end=clock();
     //printing path from source to node to destination node 'n'
-    //print_path(&previous);
+    printf("Shortest path from node 1 to node 100000:\n");
+    print_path(&previous);
+    printf("\n\nCost of the shortest path:%lld units",dist[nodes]);
     double num=end-start;
     double den=CLOCKS_PER_SEC;
     double time=num/den;
-    printf("\nTime=%f",time);
+    printf("\nTime=%f Milliseconds",time*1000);
     return 0;
 }
