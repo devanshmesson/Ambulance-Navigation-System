@@ -7,7 +7,7 @@
 #define int long long int
 
 #ifndef ONLINE_JUDGE
-#define freopen freopen("input.txt","r",stdin);freopen("Output.txt","w",stdout);
+#define freopen freopen("Input2.txt","r",stdin);freopen("Output.txt","w",stdout);
 #else
 #define freopen //comment
 #endif
@@ -95,7 +95,7 @@ int extract_min_B()
       heap2[1].mindist=heap2[heapsize2].mindist;
       heap2[1].vertex=heap2[heapsize2].vertex;
       heapsize2--;
-      /*Compare the first node with it's child nodes*/
+      //Compare the first node with it's child nodes
       cur=1;
       while(1)
       {
@@ -123,7 +123,7 @@ int extract_min_F()
       heap1[1].mindist=heap1[heapsize1].mindist;
       heap1[1].vertex=heap1[heapsize1].vertex;
       heapsize1--;
-      /*Compare the first node with it's child nodes*/
+      //Compare the first node with it's child nodes
       cur=1;
       while(1)
       {
@@ -179,10 +179,10 @@ int bidirectional_dijkstra_minheap()
 
     while(1)
     {
-     /* ---------------------------
-           FORWARD DIJKSTRA STARTS
-       -----------------------------
-      */
+      //---------------------------
+        //   FORWARD DIJKSTRA STARTS
+      // -----------------------------
+      
       pick=heap1[1].vertex;
       extract_min_F();
 
@@ -215,15 +215,15 @@ int bidirectional_dijkstra_minheap()
         if(visit[pick]==1){break;}
         visit[pick]=1;
 
-        /* ---------
-           FORWARD DIJKSTRA ENDS
-           ---------
-         */
+        //---------
+           //FORWARD DIJKSTRA ENDS
+         //  ---------
+         
 
-         /* ---------------------------
-           BACKWARD DIJKSTRA STARTS
-          -----------------------------
-         */
+         // ---------------------------
+           //BACKWARD DIJKSTRA STARTS
+          //-----------------------------
+         
 
       pick=heap2[1].vertex;
       extract_min_B();
