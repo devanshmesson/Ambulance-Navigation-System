@@ -3,7 +3,7 @@
 #include<time.h>
 
 #ifndef ONLINE_JUDGE
-#define freopen freopen("input.txt","r",stdin);freopen("out.txt","w",stdout);
+#define freopen freopen("Input2.txt","r",stdin);freopen("Output.txt","w",stdout);
 #else
 #define freopen //comment
 #endif
