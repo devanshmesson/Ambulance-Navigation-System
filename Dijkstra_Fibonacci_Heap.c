@@ -8,7 +8,7 @@
 #define int long long int
 
 #ifndef ONLINE_JUDGE
-#define freopen freopen("input.txt","r",stdin);freopen("Output.txt","w",stdout);
+#define freopen freopen("Input2.txt","r",stdin);freopen("Output.txt","w",stdout);
 #else
 #define freopen //comment
 #endif
@@ -331,7 +331,7 @@ main()
      dijkstra_fibonacciheap();
      end=clock();
     //printing path from source to node to destination node 'n'
-     printf("Shortest path from node 1 to node 100000:\n");
+    printf("Shortest path from node 1 to node 100000:\n");
     print_path();
     printf("Shortest distance from node 1 to node 100000:%lld units\n",dist[nodes]);
     double num=end-start;
