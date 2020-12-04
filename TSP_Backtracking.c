@@ -7,6 +7,12 @@ int nodes,edges,distance,a,b,path_cost;
 int graph[100][100];
 int swap(int *a,int *b){ int temp=*a; *a=*b; *b=temp;}
 
+#ifndef ONLINE_JUDGE
+#define freopen freopen("Input2.txt","r",stdin);freopen("Output.txt","w",stdout);
+#else
+#define freopen //comment
+#endif
+
 
 void TSP_Backtracking(int* shortest,int start,int end,int* adjac,int* final_path)
 {
@@ -46,6 +52,8 @@ int print_path(int* final_path)
 {
 
   printf("Cost of going through this path:%lld\n",path_cost);
+  printf("Shortest route:\n");
+
  printf("1 ");
  for(int i=1;i<=nodes-1;i++)printf("%lld ",final_path[i]);
  printf("1\n");
@@ -54,6 +62,7 @@ int print_path(int* final_path)
 
 int main()
 {
+    freopen
     scanf("%lld%lld",&nodes,&edges); //nodes and edges
     int adjac[nodes+1],previous[nodes+1],map[nodes+1];;
     memset(adjac,0,sizeof(adjac));
@@ -90,12 +99,13 @@ int main()
     time_t start,end;
     start=clock();
     TSP_Backtracking(&shortest,1,nodes-1,&adjac,&final_path);
-    //print_path(&final_path);
     end=clock();
+    printf("Shortest path from node 1 to node 100000:\n");
+    print_path(&final_path);
     double num=end-start;
     double den=CLOCKS_PER_SEC;
     double time=num/den;
-    printf("\nTime=%f",time);
+    printf("\nTime=%f Milliseconds",time*1000);
 
     return 0;
 }
