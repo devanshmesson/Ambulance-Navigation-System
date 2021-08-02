@@ -6,3 +6,5 @@
 
 4.Implemented Bi-directional Dijkstra algorithm and Genetic algorithm to improve the execution times(stated above).
 
+5.Published a Research paper - [Click Here](https://ieeexplore.ieee.org/document/9397200/authors#authors)
+
